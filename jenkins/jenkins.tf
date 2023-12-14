@@ -4,6 +4,7 @@ resource "aws_lightsail_instance" "jenkins" {
   blueprint_id      = "ubuntu_22_04"
   bundle_id         = "small_2_0"
   key_pair_name     = "shop"
+  user_data = "cd /home/ubuntu && sudo git clone https://github.com/uphiller/shop-infra.git && chmod 777 ./shop-infra/jenkins/jenkins.sh"
 }
 
 resource "aws_lightsail_instance_public_ports" "jenkins" {
