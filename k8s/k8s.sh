@@ -4,9 +4,9 @@ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmo
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
 sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
-sudo apt-get install -y containerd.io
-sudo systemctl start containerd
-sudo systemctl enable containerd
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+#sudo systemctl start containerd
+#sudo systemctl enable containerd
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
 sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg  https://dl.k8s.io/apt/doc/apt-key.gpg
@@ -21,11 +21,12 @@ sudo rm /etc/containerd/config.toml
 sudo systemctl restart containerd
 
 ## master
-#kubeadm init --apiserver-advertise-address=172.26.9.70 --pod-network-cidr=10.244.0.0/16
+#kubeadm init
 #mkdir -p $HOME/.kube
 #sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 #sudo chown $(id -u):$(id -g) $HOME/.kube/config
 #kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+#kubectl get pod -n kube-system -w
 
 ##node
 #kubeadm join 172.26.9.70:6443 --token w95s0e.xas3an9mnw3z5cw3 --discovery-token-ca-cert-hash sha256:5af7796b321cbd364cef0567c62456a509530636aa05a3eb2ecaf0e0ae85b474
