@@ -20,4 +20,8 @@ sudo bash -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'
 sudo rm /etc/containerd/config.toml
 sudo systemctl restart containerd
 sudo kubeadm init
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
 

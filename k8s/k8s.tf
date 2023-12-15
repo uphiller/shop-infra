@@ -15,4 +15,10 @@ resource "aws_lightsail_instance_public_ports" "k8s-master" {
     from_port = 22
     to_port   = 22
   }
+
+  port_info {
+    protocol  = "tcp"
+    from_port = 6443
+    to_port   = 6443
+  }
 }
