@@ -19,10 +19,17 @@ sudo modprobe br_netfilter
 sudo bash -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'
 sudo rm /etc/containerd/config.toml
 sudo systemctl restart containerd
-#kubeadm init --apiserver-advertise-address=172.26.10.59 --pod-network-cidr=10.244.0.0/16
+
+## master
+#kubeadm init --apiserver-advertise-address=172.26.9.70 --pod-network-cidr=10.244.0.0/16
 #mkdir -p $HOME/.kube
 #sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 #sudo chown $(id -u):$(id -g) $HOME/.kube/config
 #kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+##node
+#kubeadm join 172.26.9.70:6443 --token w95s0e.xas3an9mnw3z5cw3 --discovery-token-ca-cert-hash sha256:5af7796b321cbd364cef0567c62456a509530636aa05a3eb2ecaf0e0ae85b474
+
+
 
 
