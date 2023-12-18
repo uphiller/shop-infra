@@ -4,7 +4,7 @@ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmo
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
 sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+sudo apt-get install -y containerd.io
 sudo systemctl start containerd
 sudo systemctl enable containerd
 sudo apt-get update
@@ -17,11 +17,11 @@ sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 sudo modprobe br_netfilter
 sudo bash -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'
-sudo rm /etc/containerd/config.toml
-sudo systemctl restart containerd
+#sudo rm /etc/containerd/config.toml
+#sudo systemctl restart containerd
 
 ## master
-#kubeadm init
+#sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 #mkdir -p $HOME/.kube
 #sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 #sudo chown $(id -u):$(id -g) $HOME/.kube/config
