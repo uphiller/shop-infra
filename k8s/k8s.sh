@@ -5,8 +5,8 @@ sudo chmod a+r /etc/apt/keyrings/docker.gpg
 sudo echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install -y containerd.io
-sudo systemctl start containerd
-sudo systemctl enable containerd
+#sudo systemctl start containerd
+#sudo systemctl enable containerd
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
 sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg  https://dl.k8s.io/apt/doc/apt-key.gpg
@@ -21,7 +21,7 @@ sudo bash -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'
 #sudo systemctl restart containerd
 
 ## master
-#sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+#sudo kubeadm init --apiserver-advertise-address=172.26.10.6 --pod-network-cidr=10.244.0.0/16 \
 #mkdir -p $HOME/.kube
 #sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 #sudo chown $(id -u):$(id -g) $HOME/.kube/config
