@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  namespace: data
+  labels:
+    app.kubernetes.io/name: mysql
+spec:
+  containers:
+    - name: mysql
+      image: mysql:8.0.26
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root
+      ports:
+        - containerPort: 3306
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-svc
+  namespace: data
+spec:
+  ports:
+    - port: 3306
+      protocol: TCP
+      targetPort: 3306
+  selector:
+    app.kubernetes.io/name: mysql
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tcp-services
+  namespace: ingress-nginx
+data:
+  3306: data/mysql-svc:3306
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-mysql
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+spec:
+  ingressClassName: "nginx"
+  rules:
+    - host: "mysql.bettercodelab.com"
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: mysql-svc
+                port:
+                  number: 3306
