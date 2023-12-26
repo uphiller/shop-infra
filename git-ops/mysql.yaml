@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: mysql
-  namespace: data
+  namespace: shop
   labels:
     app.kubernetes.io/name: mysql
 spec:
