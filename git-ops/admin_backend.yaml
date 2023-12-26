@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: admin_backend
+  name: admin-backend
   namespace: shop
   labels:
-    app.kubernetes.io/name: admin_backend
+    app.kubernetes.io/name: admin-backend
 spec:
   containers:
     - name: backend
@@ -17,7 +17,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: admin_backend-svc
+  name: admin-backend-svc
   namespace: shop
 spec:
   ports:
@@ -25,25 +25,25 @@ spec:
       protocol: TCP
       targetPort: 8080
   selector:
-    app.kubernetes.io/name: admin_backend
+    app.kubernetes.io/name: admin-backend
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-admin_backend
+  name: ingress-admin-backend
   namespace: shop
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
   ingressClassName: "nginx"
   rules:
-    - host: "admin_backend.bettercodelab.com"
+    - host: "admin-backend.bettercodelab.com"
       http:
         paths:
           - pathType: Prefix
             path: /
             backend:
               service:
-                name: admin_backend-svc
+                name: admin-backend-svc
                 port:
                   number: 8080
