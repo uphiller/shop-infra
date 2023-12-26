@@ -11,6 +11,8 @@ spec:
       image: uphiller/shop:system
       ports:
         - containerPort: 8080
+  imagePullSecrets:
+    - name: regcred
 ---
 apiVersion: v1
 kind: Service
