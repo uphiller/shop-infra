@@ -11,6 +11,8 @@ spec:
       image: uphiller/shop:admin-backend
       ports:
         - containerPort: 8080
+      imagePullPolicy: always
+
   imagePullSecrets:
     - name: regcred
 ---
