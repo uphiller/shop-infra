@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
     - name: backend
-      image: uphiller/shop:admin_backend
+      image: uphiller/shop:admin-backend
       ports:
         - containerPort: 8080
   imagePullSecrets:
