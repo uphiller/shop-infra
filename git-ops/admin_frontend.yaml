@@ -48,4 +48,4 @@ spec:
               service:
                 name: admin-frontend-svc
                 port:
-                  number: 8080
+                  number: 8888
