@@ -10,7 +10,7 @@ spec:
     - name: frontend
       image: uphiller/shop:admin-frontend
       ports:
-        - containerPort: 80
+        - containerPort: 8888
       imagePullPolicy: Always
 
   imagePullSecrets:
