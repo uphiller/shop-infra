@@ -10,7 +10,7 @@ spec:
     - name: frontend
       image: uphiller/shop:admin-frontend
       ports:
-        - containerPort: 80
+        - containerPort: 8888
       imagePullPolicy: Always
 
   imagePullSecrets:
@@ -25,7 +25,7 @@ spec:
   ports:
     - port: 8888
       protocol: TCP
-      targetPort: 80
+      targetPort: 8888
   selector:
     app.kubernetes.io/name: admin-frontend
 ---
